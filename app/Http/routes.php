@@ -11,6 +11,29 @@
 |
 */
 
-Route::get('/', function () {
+Route::get('/welcome', function () {
     return view('welcome');
 });
+
+
+Route::get('/', ['middleware'=>'auth', function(){
+    return redirect()->to('booking');
+}]);
+
+Route::get('/booking', ['middleware'=>'auth', 'uses'=>'BookingController@View']);
+Route::get('/booking/allow/{id}', ['middleware'=>'auth', 'uses'=>'BookingController@Allow']);
+Route::get('/booking/notallow/{id}', ['middleware'=>'auth', 'uses'=>'BookingController@NotAllow']);
+
+Route::get('/stadium', ['middleware'=>'auth', 'uses'=>'StadiumController@View']);
+Route::post('/stadium/change', ['middleware'=>'auth', 'uses'=>'StadiumController@Change']);
+
+Route::get('/field', ['middleware'=>'auth', 'uses'=>'FieldController@View']);
+Route::get('/field/{id}', ['middleware'=>'auth', 'uses'=>'FieldController@Detail']);
+Route::get('/field/{id}/delete', ['middleware'=>'auth', 'uses'=>'FieldController@Delete']);
+Route::post('/field/change', ['middleware'=>'auth', 'uses'=>'FieldController@Change']);
+Route::get('/field/new/{id}', ['middleware'=>'auth', 'uses'=>'FieldController@Form']);
+Route::post('/field/new', ['middleware'=>'auth', 'uses'=>'FieldController@Create']);
+
+Route::auth();
+
+Route::get('/home', 'HomeController@index');
