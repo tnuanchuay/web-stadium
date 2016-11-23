@@ -26,12 +26,14 @@ class FieldController extends Controller
             ->get();
         $stadium = Stadium::where('sp_id', '=', $id)
             ->first();
+
         return view('field.view')->with(['result'=>$field, 'stadium'=>$stadium]);
     }
 
     public function Detail($id){
         $field = Field::find($id);
         $price = $field->PriceRate()->first();
+//	return $price;
         return view('field.detail')->with(['field'=>$field, 'price'=>$price]);
     }
 
