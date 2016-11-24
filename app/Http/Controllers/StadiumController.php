@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Stadium;
+use App\ServiceProvider;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -21,7 +22,13 @@ class StadiumController extends Controller
     public function View(){
         $id = Auth::user()->id;
         $stadium = Stadium::where('sp_id', '=', $id)->first();
-
+        if($stadium == null){
+            $sp = ServiceProvider::find($id);
+            $stadium = new Stadium();
+            $stadium->name = $sp->name;
+            $stadium->sp_id = $id;
+            $stadium->save();
+        }
         return view('stadium.view')->with(['result'=>$stadium]);
     }
 

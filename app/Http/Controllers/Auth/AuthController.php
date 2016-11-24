@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\ServiceProvider;
+use App\Stadium;
 use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
@@ -62,6 +63,7 @@ class AuthController extends Controller
      */
     protected function create(array $data)
     {
+
         return ServiceProvider::create([
             'name' => $data['name'],
             'email' => $data['email'],
