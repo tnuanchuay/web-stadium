@@ -27,6 +27,7 @@ class StadiumController extends Controller
             $stadium = new Stadium();
             $stadium->name = $sp->name;
             $stadium->sp_id = $id;
+            $stadium->image = "http://stadium.ntossapo.me:8000/upload/default.jpg";
             $stadium->save();
         }
         return view('stadium.view')->with(['result'=>$stadium]);
