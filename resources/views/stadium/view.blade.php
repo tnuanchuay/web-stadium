@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
         <div class="margin-t text-left">
-            <form action="/stadium/change" method="POST">
+            <form action="/stadium/change" method="POST" enctype="multipart/form-data">
                 <div class="col-lg-6 col-md-6">
                     {{csrf_field()}}
                     <div class="form-group">
@@ -36,6 +36,10 @@
                     <div class="form-group">
                         <label>Logitude</label>
                         <input class="form-control" type="text" name="longitude" placeholder="{{$result->longitude}}" value="{{$result->longitude}}"required/>
+                    </div>
+                    <div class="form-group">
+                        <label>Image</label>
+                        <input type="file" name="uploader" id="uploader" />
                     </div>
                 </div>
                 <div class="">

@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use Auth;
+use Storage;
+use File;
 use Illuminate\Support\Facades\Input;
 class StadiumController extends Controller
 {
@@ -33,6 +35,15 @@ class StadiumController extends Controller
         $stadium->time_close = Input::get('time_close');
         $stadium->latitude = Input::get('latitude');
         $stadium->longitude = Input::get('longitude');
+
+        $file = $request->file('uploader');
+        $name = $file->getClientOriginalName();
+        $path = public_path("upload");
+
+        $request->file('uploader')->move($path, $name);
+
+        $stadium->image = 'http://stadium.ntossapo.me:8000/upload/' . $name;
+
         $stadium->save();
         return redirect()->to('stadium');
     }
