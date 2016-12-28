@@ -17,8 +17,17 @@ Route::get('/welcome', function () {
 
 
 Route::get('/', ['middleware'=>'auth', function(){
-    return redirect()->to('booking');
+	$user = Auth::user();
+	if($user->superuser == 0){
+    	return redirect()->to('booking');
+	}else{
+		return redirect()->to('superuser/user');
+	}
 }]);
+
+Route::get('/superuser/user', ['middleware'=>'auth', 'uses'=>'SuperUserController@ViewUser']);
+Route::get('/superuser/user/update/{id}', ['middleware'=>'auth', 'uses'=>'SuperUserController@UpdateUserView']);
+
 
 Route::get('/booking', ['middleware'=>'auth', 'uses'=>'BookingController@View']);
 Route::get('/booking/allow/{id}', ['middleware'=>'auth', 'uses'=>'BookingController@Allow']);

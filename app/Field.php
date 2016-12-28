@@ -6,11 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Field extends Model
 {
-    public function Stadium(){
-        return $this->belongsTo('App\Stadium');
-    }
+    protected $table = 'fields';
+    public $timestamps = true;
+    public $fillable = ['name', 'stadium_id', 'type'];
+    protected $dates = ['deleted_at'];
 
-    public function PriceRate(){
-        return $this->hasMany('App\PriceRate');
+    public function stadium(){
+        return $this->belongsTo("App\Stadium");
     }
 }

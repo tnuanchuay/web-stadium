@@ -14,9 +14,9 @@ class ServiceProvider extends Migration
     {
         Schema::create('service_providers', function(Blueprint $table){
 		$table->increments('id');
-		$table->string('name');
 		$table->string('email');
 		$table->string('password');
+        $table->integer('superuser');
 		$table->rememberToken();
 		$table->timestamps();
 	});
